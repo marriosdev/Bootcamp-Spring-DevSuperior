@@ -1,5 +1,6 @@
 package com.marrios.gcb.projeto_workshop.resources;
 
+import com.marrios.gcb.projeto_workshop.dto.CategoryDTO;
 import com.marrios.gcb.projeto_workshop.entities.Category;
 import com.marrios.gcb.projeto_workshop.services.CategoryService;
 
@@ -22,8 +23,8 @@ public class CategoryResources {
 
     // Endpoit -> ResponseEntity encapsula uma resposta HTTP
     @GetMapping
-    public ResponseEntity<List<Category>> findAll () {
-        List<Category> list = service.findAll();
+    public ResponseEntity<List<CategoryDTO>> findAll () {
+        List<CategoryDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }   
 }
