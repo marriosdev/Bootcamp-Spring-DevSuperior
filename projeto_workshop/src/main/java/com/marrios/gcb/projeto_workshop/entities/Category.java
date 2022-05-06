@@ -1,12 +1,16 @@
 package com.marrios.gcb.projeto_workshop.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 @Entity // Definindo que isso é uma entidade
 @Table(name = "tb_category") //Definindo o nome da tabela no banco
@@ -18,8 +22,22 @@ public class Category implements Serializable{
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String name;
+    
+    @Column(columnDefinition =  "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant created_at;
+    
+    @Column(columnDefinition =  "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant updated_at;
+
+    public Instant getUpdated_at() {
+        return updated_at;
+    }
+
+    public Instant getCreated_at() {
+        return created_at;
+    }
 
     public Category() {
 
@@ -54,6 +72,16 @@ public class Category implements Serializable{
         return result;
     }
 
+    @PrePersist
+    public void prePersist() {
+        created_at = Instant.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        created_at = Instant.now();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -70,6 +98,4 @@ public class Category implements Serializable{
             return false;
         return true;
     }
-
-    
 }
