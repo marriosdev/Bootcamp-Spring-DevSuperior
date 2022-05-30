@@ -98,8 +98,8 @@ public class ProductService {
         }
     }
 
-    public Page<ProductDTO> findAllPaged(PageRequest pageRequest) {
-        Page<Product> list =  repository.findAll(pageRequest);
+    public Page<ProductDTO> findAllPaged(Pageable page) {
+        Page<Product> list =  repository.findAll(page);
         return list.map(x -> new ProductDTO(x));
     }
 }
