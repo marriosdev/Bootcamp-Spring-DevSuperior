@@ -2,7 +2,6 @@ package com.marrios.gcb.projeto_workshop.repositories;
 
 import java.util.Optional;
 
-import com.jayway.jsonpath.Option;
 import com.marrios.gcb.projeto_workshop.entities.Product;
 import com.marrios.gcb.projeto_workshop.tests.Factory;
 
@@ -55,13 +54,13 @@ public class ProductRepositoryTests {
     }
 
     @Test
-    public void deveRetornarUmNaoNuloSeOidExistir() {
+    public void findShouldReturnNotNullIfIdExists() {
         Optional<Product> result = repository.findById(exintingId);
         Assertions.assertNotNull(result);
     }
 
     @Test
-    public void deveRetornarNuloSeOidNaoExistir() {
+    public void findShouldReturnNullIfIdNotExists() {
         Optional<Product> result = repository.findById(nonExistingId);
         Assertions.assertTrue(result.isEmpty());
     }
